@@ -1,0 +1,14 @@
+<project name="ulam0" default="dist" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<!--    <property name="java-build.src-dir" location="src"/> -->
+	<property name="asl.dir" value="config/asl" />
+	<property name="repo-ivy.retrieve-pattern" value="${repo-ivy.lib-dir}/[conf]/[artifact]-[revision](-[classifier]).[ext]" />
+	<property name="repo-ivy.settings-file" value="./ivysettings.xml" />
+
+	<import file="${asl.dir}/asl-repo-ivy.xml" />
+	<import file="${asl.dir}/asl-java-build.xml" /> 
+	<import file="${asl.dir}/asl-java-test.xml" />
+	<import file="${asl.dir}/asl-java-report.xml" />
+	<import file="${asl.dir}/asl-java-package.xml" />
+
+
+</project>
