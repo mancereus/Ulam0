@@ -1,21 +1,23 @@
 package de.db12.ulam0;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 
-import de.db12.ulam0.UlamRing;
+import com.google.common.collect.TreeMultimap;
+
 import de.db12.ulam0.UlamRing.Dir;
 
 public class UlamCalc {
 
 	public static void main(String[] args) {
+		TreeMultimap<String, Integer> pfzprimes = TreeMultimap.create();
 		List<UlamPosition> pos = new ArrayList<UlamPosition>();
 		List<Integer> primes = new ArrayList<Integer>();
 		int count = 0;
 		int x = 0;
 		int y = 0;
-		for (int i = 1; i < 10; i++) {
+		for (int i = 1; i < 500; i++) {
 			new UlamRing(i);
 			x++;
 			y--;
@@ -40,9 +42,13 @@ public class UlamCalc {
 					}
 					++count;
 					boolean prime = isPrime(count, primes);
-					if (prime)
+					if (prime) {
 						primes.add(count);
-					pos.add(new UlamPosition(i, dir, x, y, count, prime));
+					}
+					UlamPosition up = new UlamPosition(i, dir, x, y, count, prime);
+					pos.add(up);
+					if(prime)
+					pfzprimes.put(up.getPFZNorm(), up.getValue());
 				}
 			}
 		}
@@ -50,6 +56,9 @@ public class UlamCalc {
 		for (UlamPosition up : pos) {
 			if (up.isPrime())
 				System.out.println(up);
+		}
+		for (Entry<String, Integer> entry : pfzprimes.entries()) {
+			System.out.println(entry.getKey() + " " + entry.getValue());
 		}
 	}
 
