@@ -1,9 +1,11 @@
 package de.db12.ulam0;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.TreeMultimap;
 
 import de.db12.ulam0.UlamRing.Dir;
@@ -11,13 +13,13 @@ import de.db12.ulam0.UlamRing.Dir;
 public class UlamCalc {
 
 	public static void main(String[] args) {
-		TreeMultimap<String, Integer> pfzprimes = TreeMultimap.create();
+		TreeMultimap<String, Long> pfzprimes = TreeMultimap.create();
 		List<UlamPosition> pos = new ArrayList<UlamPosition>();
-		List<Integer> primes = new ArrayList<Integer>();
-		int count = 0;
+		List<Long> primes = new ArrayList<Long>();
+		long count = 0;
 		int x = 0;
 		int y = 0;
-		for (int i = 1; i < 500; i++) {
+		for (int i = 1; i < 50; i++) {
 			new UlamRing(i);
 			x++;
 			y--;
@@ -57,15 +59,15 @@ public class UlamCalc {
 			if (up.isPrime())
 				System.out.println(up);
 		}
-		for (Entry<String, Integer> entry : pfzprimes.entries()) {
-			System.out.println(entry.getKey() + " " + entry.getValue());
+		for (Entry<String, Collection<Long>> entry : pfzprimes.asMap().entrySet()) {
+			System.out.println(entry.getKey() + " " + Joiner.on(",").join(entry.getValue()));
 		}
 	}
 
-	private static boolean isPrime(int count, List<Integer> primes) {
+	private static boolean isPrime(long count, List<Long> primes) {
 		if (count < 2)
 			return false;
-		for (Integer p : primes) {
+		for (Long p : primes) {
 			if (count % p == 0)
 				return false;
 

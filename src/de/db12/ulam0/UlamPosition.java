@@ -10,12 +10,12 @@ import de.db12.ulam0.UlamRing.Dir;
 public class UlamPosition {
 	private int x;
 	private int y;
-	private int value;
+	private long value;
 	private int n;
 	private Dir dir;
 	private boolean prime;
 
-	public UlamPosition(int n, Dir dir, int x, int y, int value, boolean prime) {
+	public UlamPosition(int n, Dir dir, int x, int y, long value, boolean prime) {
 		this.n = n;
 		this.dir = dir;
 		this.x = x;
@@ -32,7 +32,7 @@ public class UlamPosition {
 		return x;
 	}
 
-	public int getValue() {
+	public long getValue() {
 		return value;
 	}
 
@@ -44,13 +44,13 @@ public class UlamPosition {
 		return dir;
 	}
 
-	public int getNorm() {
+	public long getNorm() {
 		return x * x + y * y;
 	}
 
 	public String getPFZNorm() {
 		List<Integer> pfactors = new ArrayList<Integer>();
-		int tmp = getNorm();
+		long tmp = getNorm();
 		for (int i = 2; i <= tmp; i++) {
 			if (tmp % i == 0) {
 				pfactors.add(i);
